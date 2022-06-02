@@ -21,11 +21,11 @@ class GoogleSearch(unittest.TestCase):
         try:
             button = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "L2AGLb")))
+            button.click()
         except:
             True
-        finally:
-            button.click()
-    '''
+
+
     def test_title(self):
         print("Running test: test_title")
         mainPage = page.MainPage(self.driver)
@@ -108,7 +108,7 @@ class GoogleSearch(unittest.TestCase):
             assert False, "KEYBOARD_BUTTON not found."
         time.sleep(1)
         assert mainPage.is_element_visible((MainPageLocators.KEYBOARD))
-    '''
+
     def test_graphics_page(self):
         print("Running test: test_graphics_page")
         mainPage = page.MainPage(self.driver)
@@ -122,15 +122,13 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "gsr")))
         try:
-            mainPage.click_button((MainPageLocators.GRAPHICS_BUTTON))
+            mainPage.click_parent_element((SearchResultsPagesLocators.GRAPHICS_BUTTON))
         except:
             assert False, "GRAPHICS_BUTTON button not found."
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "islmp")))
         search_result_page = page.SearchResultPage(self.driver)
         assert search_result_page.is_result_found(".jpeg")
-
-    '''
 
     def test_show_graphic_details(self):
         print("Running test: test_graphics_page")
@@ -145,16 +143,16 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "gsr")))
         try:
-            mainPage.click_button((MainPageLocators.GRAPHICS_BUTTON))
+            mainPage.click_parent_element((SearchResultsPagesLocators.GRAPHICS_BUTTON))
         except:
             assert False, "GRAPHICS_BUTTON button not found."
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "islmp")))
         try:
-            mainPage.click_button((MainPageLocators.GRAPHIC_SEARCH_RESULT))
+            mainPage.click_button((SearchResultsPagesLocators.GRAPHIC_SEARCH_RESULT))
         except:
             assert False, "GRAPHIC_SEARCH_RESULT button not found."
-        assert mainPage.is_element_visible((MainPageLocators.GRAPHIC_DETAILS))
+        assert mainPage.is_element_visible((SearchResultsPagesLocators.GRAPHIC_DETAILS))
 
     def test_related_images(self):
         print("Running test: test_graphics_page")
@@ -169,24 +167,21 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "gsr")))
         try:
-            mainPage.click_button((MainPageLocators.GRAPHICS_BUTTON))
+            mainPage.click_parent_element((SearchResultsPagesLocators.GRAPHICS_BUTTON))
         except:
             assert False, "GRAPHICS_BUTTON button not found."
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "islmp")))
         try:
-            mainPage.click_button((MainPageLocators.GRAPHIC_SEARCH_RESULT))
+            mainPage.click_button((SearchResultsPagesLocators.GRAPHIC_SEARCH_RESULT))
         except:
             assert False, "GRAPHIC_SEARCH_RESULT button not found."
         try:
-            mainPage.is_element_visible((MainPageLocators.GRAPHIC_DETAILS))
+            mainPage.is_element_visible((SearchResultsPagesLocators.GRAPHIC_DETAILS))
         except:
             assert False, "GRAPHIC_DETAILS button not found."
         time.sleep(1)
-        assert mainPage.is_element_visible((MainPageLocators.RELATED_IMAGE))
- 
-
-
+        assert mainPage.is_element_visible((SearchResultsPagesLocators.RELATED_IMAGE))
 
     def test_video_preview(self):
         print("Running test: test_video_preview")
@@ -201,15 +196,12 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "gsr")))
         try:
-            mainPage.click_button((MainPageLocators.VIDEO_BUTTON))
+            mainPage.click_parent_element((SearchResultsPagesLocators.VIDEO_BUTTON))
         except:
             assert False, "VIDEO_BUTTON button not found."
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "rso")))
-        assert mainPage.is_video_preview_available((MainPageLocators.VIDEO_MINIATURE))
-
- 
-
+        assert mainPage.is_video_preview_available((SearchResultsPagesLocators.VIDEO_MINIATURE))
 
     def test_video_preview_running(self):
         print("Running test: test_video_preview")
@@ -224,17 +216,12 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "gsr")))
         try:
-            mainPage.click_button((MainPageLocators.VIDEO_BUTTON))
+            mainPage.click_parent_element((SearchResultsPagesLocators.VIDEO_BUTTON))
         except:
             assert False, "VIDEO_BUTTON button not found."
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "rso")))
-        assert mainPage.is_video_preview_running((MainPageLocators.VIDEO_MINIATURE))
-
-
-
-
-
+        assert mainPage.is_video_preview_running((SearchResultsPagesLocators.VIDEO_MINIATURE))
 
     def test_drop_down_menu(self):
         print("Running test: test_function_button")
@@ -246,16 +233,11 @@ class GoogleSearch(unittest.TestCase):
     def test_account_button_in_drop_down(self):
         print("Running test: test_account_button_drop_down")
         mainPage = page.MainPage(self.driver)
-        mainPage.click_button((MainPageLocators.FUNCTION_BUTTON)) 
+        mainPage.click_button((MainPageLocators.FUNCTION_BUTTON))
         mainPage.switch_to_iframe()
         mainPage.click_button((MainPageLocators.ACCOUNT_BUTTON_DROP_DOWN))
         assert mainPage.is_element_visible((MainPageLocators.ACCOUNT_OVERVIEW))
-   
 
-
-
-
-  
     def test_application_bubble_visibility(self):
         print("Running test: test_dymek")
         mainPage = page.MainPage(self.driver)
@@ -268,33 +250,10 @@ class GoogleSearch(unittest.TestCase):
         mainPage.click_button((MainPageLocators.LUCKY_BUTTON))
         search_result_page = page.SearchResultPage(self.driver)
         assert mainPage.is_title_matches("Doodle")
-    '''
-
- 
-
-
-    '''
-    def test_graphic_button(self):
-        print("Running test: test_graphic_button")
-        mainPage = page.MainPage(self.driver)
-        mainPage.click_button((MainPageLocators.GRAPHICS_BUTTON))
-        assert True
-
-
-
-    def test_search_button(self):
-        print("Running test: test_search_button_drop_down")
-        mainPage = page.MainPage(self.driver)
-        mainPage.click_function_button()  
-        mainPage.switch_to_iframe()
-        mainPage.click_search_button_drop_down()
-        print(self.driver.title)
-        assert True
-    '''
-
 
     def tearDown(self):
         time.sleep(1)
+        self.driver.close()
 
 
 if __name__ == "__main__":

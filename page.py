@@ -1,7 +1,5 @@
 from locator import *
 from element import BasePageElement
-from selenium.webdriver.support.ui import Select
-from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,12 +9,9 @@ from selenium.webdriver.support import expected_conditions as EC
 class SearchTextElement(BasePageElement):
     locator = " "
 
-
 class BasePage(object):
     def __init__(self, driver):
         self.driver = driver
-
-
 
 
 class MainPage(BasePage):
@@ -30,7 +25,6 @@ class MainPage(BasePage):
         element = self.driver.find_element(*button)
         element.click()
 
-
     def is_element_visible(self, element):
         try:
             elem = self.driver.find_element(*element)
@@ -38,7 +32,6 @@ class MainPage(BasePage):
             return False
         else:
             return elem.is_displayed()
-
 
     def get_text_from_search_bar(self):
         text = self.driver.find_element(*MainPageLocators.SEARCH_FIELD)
@@ -56,7 +49,6 @@ class MainPage(BasePage):
     def switch_to_iframe(self):
         iframe = self.driver.find_element(*MainPageLocators.IFRAME)
         self.driver.switch_to.frame(iframe)
-# ADD FNCTION switch back iframe
 
     def is_video_preview_available(self, video):
         action = ActionChains(self.driver)
@@ -90,6 +82,11 @@ class MainPage(BasePage):
             statePointed = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video'))).get_attribute("style")
             print(statePointed)
             return not stateNotPointed == statePointed
+
+    def click_parent_element(self, button):
+        element = self.driver.find_element(*button)
+        clickable_element = element.find_element(By.XPATH, "..")
+        clickable_element.click()
 
 
 class SearchResultPage(BasePage):
