@@ -50,6 +50,14 @@ class MainPage(BasePage):
         iframe = self.driver.find_element(*MainPageLocators.IFRAME)
         self.driver.switch_to.frame(iframe)
 
+
+
+
+class SearchResultsPage(BasePage):
+
+    def is_result_found(self, search):
+        return search in self.driver.page_source
+
     def is_video_preview_available(self, video):
         action = ActionChains(self.driver)
         element = self.driver.find_element(*video)
@@ -87,10 +95,3 @@ class MainPage(BasePage):
         element = self.driver.find_element(*button)
         clickable_element = element.find_element(By.XPATH, "..")
         clickable_element.click()
-
-
-class SearchResultPage(BasePage):
-
-    def is_result_found(self, search):
-        return search in self.driver.page_source
-
