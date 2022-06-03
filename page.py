@@ -55,7 +55,7 @@ class MainPage(BasePage):
 
 class SearchResultsPage(BasePage):
 
-    def is_result_found(self, search):
+    def is_result_found(self):
         try:
             WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, 'OotqVd')))
         except:
@@ -63,6 +63,8 @@ class SearchResultsPage(BasePage):
         else:
             return False
 
+    def is_element_type_found(self, search):
+        return search in self.driver.page_source
 
     def is_video_preview_available(self, video):
         action = ActionChains(self.driver)

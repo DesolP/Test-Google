@@ -45,7 +45,7 @@ class GoogleSearch(unittest.TestCase):
          WebDriverWait(self.driver, 10).until(
              EC.presence_of_element_located((By.ID, "gsr")))
          search_result_page = page.SearchResultsPage(self.driver)
-         assert search_result_page.is_result_found(search)
+         assert search_result_page.is_result_found()
 
     def test_search_bar_clear_button(self):
         print("Running test: test_search_bar")
@@ -85,7 +85,7 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "gsr")))
         search_result_page = page.SearchResultsPage(self.driver)
-        assert search_result_page.is_result_found(search)
+        assert search_result_page.is_result_found()
 
     def test_empty_search_bar(self):
          print("Running test: test_empty_search_bar")
@@ -129,7 +129,7 @@ class GoogleSearch(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.ID, "islmp")))
         search_result_page = page.SearchResultsPage(self.driver)
-        assert search_result_page.is_result_found(".jpeg")
+        assert search_result_page.is_element_type_found(".jpeg")
 
     def test_show_graphic_details(self):
         print("Running test: test_graphics_page")
