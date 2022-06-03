@@ -56,7 +56,13 @@ class MainPage(BasePage):
 class SearchResultsPage(BasePage):
 
     def is_result_found(self, search):
-        return search in self.driver.page_source
+        try:
+            WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, 'OotqVd')))
+        except:
+            return True
+        else:
+            return False
+
 
     def is_video_preview_available(self, video):
         action = ActionChains(self.driver)
@@ -64,7 +70,7 @@ class SearchResultsPage(BasePage):
         action.move_to_element(element)
         action.perform()
         try:
-            WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video')))
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video')))
         except:
             return False
         else:
@@ -76,18 +82,18 @@ class SearchResultsPage(BasePage):
         action.move_to_element(element)
         action.perform()
         try:
-            WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video')))
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video')))
         except:
             return False
         else:
             action.move_to_element(self.driver.find_element(*MainPageLocators.SEARCH_FIELD))
             action.perform()
             time.sleep(1)
-            stateNotPointed = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video'))).get_attribute("style")
+            stateNotPointed = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video'))).get_attribute("style")
             print(stateNotPointed)
             action.move_to_element(element)
             action.perform()
-            statePointed = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video'))).get_attribute("style")
+            statePointed = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="V1Ddwd"]/video'))).get_attribute("style")
             print(statePointed)
             return not stateNotPointed == statePointed
 
